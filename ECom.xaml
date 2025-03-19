@@ -1,0 +1,53 @@
+﻿<Page x:Class="Dashboard.ECom"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dashboard"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ECom">
+
+    <Grid Background="White">
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="30.32"/>
+            <RowDefinition Height="Auto" MinHeight="35"/>
+            <RowDefinition Height="Auto" MinHeight="34"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="111"/>
+        </Grid.RowDefinitions>
+
+        <!-- Labels -->
+        <TextBlock Text="Product Name:" VerticalAlignment="Top" Margin="10,6,10,0" Grid.Column="0" Height="16" Grid.Row="1"/>
+        <TextBlock Text="Quantity:" VerticalAlignment="Center" Margin="10,0,10,0" Grid.Row="2" Grid.Column="0" Height="16"/>
+        <TextBlock Text="Category:" VerticalAlignment="Center" Margin="10,0,10,0" Grid.Row="3" Grid.Column="0" Height="16"/>
+        <TextBlock Text="Price:" VerticalAlignment="Top" Margin="10,11,10,0" Grid.Row="4" Grid.Column="0" Height="16"/>
+        <TextBlock Text="Discount:" VerticalAlignment="Top" Margin="10,11,10,0" Grid.Row="5" Grid.Column="0" Height="16"/>
+
+        <!-- Input Fields -->
+        <ComboBox x:Name="RawBox"  ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}"  DisplayMemberPath="ProductName" Margin="112,2,516,3" Grid.RowSpan="2" />
+        <TextBox x:Name="Quantity" Grid.Row="2" Margin="112,5,516,6"  TextChanged="Quantity_TextChanged"/>
+        <TextBox x:Name="Category" Grid.Row="3" Margin="112,1,516,4" IsReadOnly="True"/>
+        <TextBox x:Name="Price" Grid.Row="4" Margin="112,5,516,6" IsReadOnly="True"/>
+        <TextBox x:Name="Discount" Grid.Row="5" Margin="112,5,516,78" IsReadOnly="True"/>
+        <Button Content="Add"
+        Click="Add_Click" Margin="447,3,239,3" Grid.Row="3"/>
+
+        <!--Datagrid for added raw materials-->
+        <DataGrid x:Name="ProductDataGrid" 
+  ItemsSource="{Binding SelectedProducts}"
+  AutoGenerateColumns="False" Margin="10,44,10,-187" Grid.Row="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="*"/>
+                <DataGridTextColumn Header="Quantity (g)" Binding="{Binding Quantity}" Width="*"/>
+                <DataGridTextColumn Header="Price (R)" Binding="{Binding Price}" Width="*"/>
+                <DataGridTextColumn Header="Discount (%)" Width="*"/>
+                <DataGridTextColumn Header="Operators"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

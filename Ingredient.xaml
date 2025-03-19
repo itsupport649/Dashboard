@@ -1,0 +1,61 @@
+﻿<Page x:Class="Dashboard.Ingredient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dashboard"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Ingredient">
+    <Border Padding="10" Background="#eff2f7" Margin="-22,0,0,-85">
+        <Grid Background="#eff2f7" Margin="-10,-10,0,0">
+
+            <!-- Define Columns for Label and Input Fields -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="166*" />
+                <!-- Label Column -->
+                <ColumnDefinition Width="93*" />
+                <ColumnDefinition Width="531*"/>
+                <!-- Input Column -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Define Rows for Each Field -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="30.32"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Labels -->
+            <TextBlock Text="Product Name:" VerticalAlignment="Top" Margin="10,6,10,0" Grid.Column="0" Height="16" Grid.Row="1"/>
+            <TextBlock Text="Quantity:" VerticalAlignment="Center" Margin="10,0,10,0" Grid.Row="2" Grid.Column="0" Height="16"/>
+            <TextBlock Text="Category:" VerticalAlignment="Center" Margin="10,0,10,0" Grid.Row="3" Grid.Column="0" Height="16"/>
+            <TextBlock Text="Price:" VerticalAlignment="Top" Margin="10,11,10,0" Grid.Row="4" Grid.Column="0" Height="16"/>
+
+            <!-- Input Fields -->
+            <ComboBox x:Name="RawBox"  ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}"  DisplayMemberPath="ProductName" Grid.Column="1" Margin="26,0,400,3" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <TextBox x:Name="Quantity" Grid.Row="2" Grid.Column="1" Margin="26,5,400,7"  TextChanged="Quantity_TextChanged" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Category" Grid.Row="2" Grid.Column="1" Margin="26,34,400,0" IsReadOnly="True" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Price" Grid.Row="4" Grid.Column="1" Margin="26,5,400,40" IsReadOnly="True" Grid.ColumnSpan="2"/>
+            <Button Content="Add to List"
+            Click="AddToDataGrid" Grid.Column="2" Margin="204,3,226,4" Grid.Row="2"/>
+
+            <!--Datagrid for added raw materials-->
+            <DataGrid x:Name="ProductDataGrid" 
+              ItemsSource="{Binding SelectedProducts}"
+              AutoGenerateColumns="False" Margin="10,56,10,-270" Grid.Row="4" Grid.ColumnSpan="3">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="*"/>
+                    <DataGridTextColumn Header="Quantity (g)" Binding="{Binding Quantity}" Width="*"/>
+                    <DataGridTextColumn Header="Price (R)" Binding="{Binding Price}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button  Content="Complete Recipe" Width="200" Height="40" Margin="336,358,10,-335" Grid.Row="4" RenderTransformOrigin="0.474,2.8" Grid.Column="2" Click="CompleteRecipe_Click"/>
+
+
+        </Grid>
+    </Border>
+</Page>

@@ -1,0 +1,78 @@
+﻿<Page x:Class="Dashboard.THFE"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dashboard"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="THFE">
+    <Border>
+        <Grid Background="#eff2f7" Margin="-10,-68,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="241*" />
+                <ColumnDefinition Width="290*" />
+                <ColumnDefinition Width="279*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="19*"/>
+                <RowDefinition Height="91*"/>
+                <RowDefinition Height="auto" MinHeight="65"/>
+                <RowDefinition Height="auto" MinHeight="68"/>
+                <RowDefinition Height="auto" MinHeight="70"/>
+                <RowDefinition Height="auto" MinHeight="205.002"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Quote Fields -->
+            <TextBlock Text="Recipe:" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Column="0" Grid.Row="1" Height="16"/>
+            <ComboBox x:Name="RecipeBox" ItemsSource="{Binding Recipe}" SelectedItem="{Binding SelectedRecipe}" 
+         DisplayMemberPath="RecipeName" Margin="130,33,0,0" Grid.Row="1" Grid.ColumnSpan="2" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188"/>
+
+            <TextBlock Text="Proposed Margin:" VerticalAlignment="Top" Margin="20,18,0,0" Grid.Row="2" Grid.Column="0" Height="16"/>
+            <TextBox x:Name="ProposedMargin" Grid.Row="2" Margin="129,14,215,10" Grid.ColumnSpan="2" TextChanged="Packaging_TextChanged"/>
+
+            <TextBlock Text="New Price:" VerticalAlignment="Top" Margin="18,20,2,0" Grid.Row="4" Grid.Column="0" Height="16"/>
+            <TextBox x:Name="NewPrice" Grid.Row="4" Margin="128,12,0,24" IsReadOnly="True" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="186"/>
+
+            <TextBlock Text="Proposed Price:" VerticalAlignment="Top" Margin="20,20,0,0" Grid.Row="3" Grid.Column="0" Height="16"/>
+            <TextBox x:Name="ProposedPrice" Grid.Row="3" Margin="129,14,215,17" IsReadOnly="True" Grid.ColumnSpan="2"/>
+
+            <TextBlock Text="Old Price" VerticalAlignment="Center" Margin="116,0,232,0" Grid.Row="1" Grid.Column="1" Height="16" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="OldPrice" Grid.Row="1" Margin="227,31,156,22" IsReadOnly="True" Grid.ColumnSpan="2" Grid.Column="1"/>
+
+            <TextBlock Text="Net Profit" VerticalAlignment="Top" Margin="113,18,236,0" Grid.Row="2" Grid.Column="1" Height="16" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="NetProfit" Grid.Row="2" Margin="227,15,157,13" IsReadOnly="True" TextChanged="Price_TextChanged" Grid.ColumnSpan="2" Grid.Column="1"/>
+
+            <TextBlock Text="Net Margin" VerticalAlignment="Top" Margin="113,19,236,0" Grid.Row="3" Grid.Column="1" Height="16" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="NetMargin" Grid.Row="3" Margin="227,14,157,17" IsReadOnly="True" TextChanged="Price_TextChanged" Grid.ColumnSpan="2" Grid.Column="1"/>
+
+            <Button Content="AddCosting" Grid.Column="1" Margin="259,9,217,24" Grid.Row="4" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2"/>
+
+            <!--Datagrid for added recipes-->
+            <DataGrid x:Name="QuoteDataGrid" ItemsSource="{Binding QuoteItems}"
+         AutoGenerateColumns="False" Margin="10,4,10,48" Grid.Row="5" Grid.ColumnSpan="3" SelectionChanged="QuoteDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Recipe" Binding="{Binding RecipeName}" Width="*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding RawPrice}" Width="*"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                    <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}" Width="80"/>
+                    <DataGridTextColumn Header="Total Cost (VAT)" Binding="{Binding TotalCostVAT}" Width="100"/>
+                    <DataGridTextColumn Header="Proposed Margin" Binding="{Binding ProposedMarin}" Width="101"/>
+                    <DataGridTextColumn Header="Poposed Price" Binding="{Binding ProposedPrice}" Width="101"/>
+                    <DataGridTextColumn Header="Selling Price" Binding="{Binding SellingPrice}" Width="100"/>
+                    <DataGridTextColumn Header="Net Profit" Binding="{Binding NetProfit}" Width="70"/>
+                    <DataGridTextColumn Header="Net Margin" Binding="{Binding NetMagin}" Width="70"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Content="Save" Margin="139,167,62,10" 
+       Grid.Row="5" Grid.Column="2"/>
+
+
+
+
+        </Grid>
+    </Border>
+</Page>
